@@ -16,13 +16,16 @@ export interface Product {
   inStock: boolean;
 }
 
+export interface OrderItem {
+  id: string;
+  productId: string;
+  quantity: number;
+}
+
 export interface Order {
   id: string;
   userId: string;
-  products: Array<{
-    productId: string;
-    quantity: number;
-  }>;
+  products: OrderItem[];
   orderDate: Date;
   totalAmount: number;
 } 
