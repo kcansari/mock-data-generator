@@ -1,23 +1,32 @@
-# Faker Data Producer
+# Mock Data Generator
 
-A TypeScript-based fake data generator using Faker.js to produce realistic test data for development and testing purposes.
+A robust TypeScript application that generates realistic mock data and populates a PostgreSQL database. Built with Faker.js for data generation and node-postgres for database operations.
 
 ## Features
 
-- 🎯 Generates realistic fake data for common entities:
-  - Users (with personal information)
-  - Products (with commerce details)
-  - Orders (with relationships between users and products)
-- 🔧 Built with TypeScript for type safety
-- 🚀 Easy to extend and customize
-- 📦 Bulk data generation capabilities
-- 💪 Strong typing with TypeScript interfaces
+- 🎲 Generates realistic mock data for:
+  - Users
+  - Products
+  - Orders
+  - Order Items
+- 📊 PostgreSQL integration with proper relations
+- 🔄 Transaction-based data insertion
+- 🛡️ Parameterized queries for SQL injection prevention
+- 🎯 Unique constraint handling
+- 💪 TypeScript for type safety
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository
 ```bash
-git clone https://github.com/kcansari/mock-data-generator.git
+git clone https://github.com/your-username/mock-data-generator.git
+cd mock-data-generator
 ```
 
 2. Install dependencies:
@@ -25,99 +34,50 @@ git clone https://github.com/kcansari/mock-data-generator.git
 npm install
 ```
 
-3. Run the script:
+3. Set up the database
 ```bash
-npm run start
+psql -U postgres
+CREATE DATABASE mock_data;
+\c mock_data
+\i src/db/schema.sql
+```
+
+4. Configure environment variables
+```bash
+cp .env.example .env
+# Edit .env with your database credentials
 ```
 
 ## Usage
 
-### Generate Sample Data
-
-Run the default data generation script:
-
+Generate and insert mock data:
 ```bash
 npm run generate
 ```
 
-This will generate:
-- 10 sample users
-- 20 sample products
-- 15 sample orders
+This will:
+- Generate 1000 users
+- Generate 2000 products
+- Generate 1500 orders with random items
+- Insert all data into the PostgreSQL database
 
-### Using in Your Code
+## Database Schema
 
-```typescript
-import { DataGenerator } from './src/generators';
+- `users`: Store user information
+- `products`: Store product details
+- `orders`: Store order information
+- `order_items`: Store order line items with product references
 
-// Create a new generator instance
-const generator = new DataGenerator();
-
-// Generate a single user
-const user = generator.generateUser();
-
-// Generate a single product
-const product = generator.generateProduct();
-
-// Generate bulk data
-const data = generator.generateBulkData(
-  userCount: number,
-  productCount: number,
-  orderCount: number
-);
-```
-
-## Available Scripts
-
-- `npm start` - Run the application
-- `npm run build` - Build the TypeScript code
-- `npm run generate` - Generate sample data
-
-## Customization
-
-### Modifying Data Generation
-
-You can customize the data generation by modifying the generator methods in `src/generators.ts`. Each method uses various Faker.js functions that can be adjusted to your needs.
-
-Example of customizing user generation:
-
-```typescript
-generateUser(): User {
-  return {
-    id: faker.string.uuid(),
-    firstName: faker.person.firstName(),
-    lastName: faker.person.lastName(),
-    email: faker.internet.email(),
-    avatar: faker.image.avatar(),
-    dateOfBirth: faker.date.past({ years: 50 }),
-    // Add more fields as needed
-  };
-}
-```
-
-### Adding New Entity Types
-
-1. Define a new interface in `src/types.ts`
-2. Create a new generator method in `src/generators.ts`
-3. Update the `generateBulkData` method if needed
-
-## Dependencies
+## Tech Stack
 
 - TypeScript
-- @faker-js/faker
-- ts-node (dev dependency)
-- @types/node (dev dependency)
-
+- Faker.js
+- node-postgres
+- dotenv
 
 ## License
 
-This project is licensed under the ISC License.
+ISC
 
-## Future Improvements
-
-- Add data export functionality (JSON, CSV)
-- Add API endpoints to serve fake data
-- Add more entity types
-- Add data validation
-- Add more complex relationships between entities
-- Add customizable data generation rules
+---
+Built with ❤️ for developers who need realistic test data
