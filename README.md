@@ -25,7 +25,7 @@ A robust TypeScript application that generates realistic mock data and populates
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/mock-data-generator.git
+git clone https://github.com/kcansari/mock-data-generator.git
 cd mock-data-generator
 ```
 
